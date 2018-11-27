@@ -1,0 +1,70 @@
+1 使用Metaspace（JEP 122）代替持久代（PermGen space）。在JVM参数方面，使用-XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替原来的-XX:PermSize和-XX:MaxPermSize。
+
+2 类依赖分析器：jdeps
+jdeps org.springframework.core-3.0.5.RELEASE.jar
+org.springframework.core-3.0.5.RELEASE.jar -> C:\Program Files\Java\jdk1.8.0\jre\lib\rt.jar
+   org.springframework.core (org.springframework.core-3.0.5.RELEASE.jar)
+      -> java.io                                            
+      -> java.lang                                          
+      -> java.lang.annotation                               
+      -> java.lang.ref                                      
+      -> java.lang.reflect                                  
+      -> java.util                                          
+      -> java.util.concurrent                               
+      -> org.apache.commons.logging                         not found
+      -> org.springframework.asm                            not found
+      -> org.springframework.asm.commons                    not found
+   org.springframework.core.annotation (org.springframework.core-3.0.5.RELEASE.jar)
+      -> java.lang                                          
+      -> java.lang.annotation                               
+      -> java.lang.reflect                                  
+      -> java.util
+      
+3 jjs是一个基于标准Nashorn引擎的命令行工具，可以接受js源码并执行
+jjs func.js
+      
+4 Java 8还添加了新的java.util.concurrent.locks.StampedLock类，用于支持基于容量的锁——该锁有三个模型用于支持读写操作
+（可以把这个锁当做是java.util.concurrent.locks.ReadWriteLock的替代者）
+
+5 并行数组排序 和设值
+ long[] arrayOfLong = new long [ 20000 ];        
+Arrays.parallelSetAll( arrayOfLong,  index -> ThreadLocalRandom.current().nextInt( 1000000 ) );
+Arrays.parallelSort( arrayOfLong );        
+
+6 Nashorn JavaScript引擎
+Java 8提供了新的Nashorn JavaScript引擎，使得我们可以在JVM上开发和运行JS应用。Nashorn JavaScript引擎是javax.script.ScriptEngine的另一个实现版本，
+这类Script引擎遵循相同的规则，允许Java和JavaScript交互使用
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName( "JavaScript" );
+    System.out.println( engine.getClass().getName() );
+    System.out.println( "Result:" + engine.eval( "function f() { return 1; }; f() + 1;" ) );
+    
+7 Date/Time API
+LocalDate，LocalTime，Clock
+
+8 Streams
+见代码
+
+9 Optional
+见代码
+
+10 Lambda表达式和函数式接口
+见代码
+
+11 重复注解
+见代码
+
+12 方法引用
+见代码
+
+13 接口的默认方法和静态方法
+见代码
+
+
+
+
+
+    
+
+
+
